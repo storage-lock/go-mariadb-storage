@@ -15,7 +15,7 @@ func TestNewMariaDbStorage(t *testing.T) {
 	assert.NotEmpty(t, dsn)
 	s, err := NewMariaDbStorage(context.Background(), &MariaStorageOptions{
 		MySQLStorageOptions: &mysql_storage.MySQLStorageOptions{
-			ConnectionManager: NewMariaStorageConnectionManagerFromDSN(dsn),
+			ConnectionManager: NewMariaDBConnectionManagerFromDSN(dsn),
 			TableName:         storage_test_helper.TestTableName,
 		},
 	})
