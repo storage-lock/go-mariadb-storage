@@ -16,7 +16,7 @@ jobs:
           container port: 3306 # Optional, default value is 3306. The port of container
           character set server: 'utf8mb4' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
           collation server: 'utf8mb4_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
-          mariadb version: '10.4.10' # Optional, default value is "latest". The version of the MariaDB
+          #          mariadb version: '10.4.10' # Optional, default value is "latest". The version of the MariaDB
           mysql database: 'storage_lock_test' # Optional, default value is "test". The specified database which will be create
           # 这里就直接写死了
           mysql root password: "UeGqAm8CxYGldMDLoNNt" # Required if "mysql user" is empty, default is empty. The root superuser password
