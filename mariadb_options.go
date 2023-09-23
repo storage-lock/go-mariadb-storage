@@ -6,23 +6,26 @@ import (
 	"github.com/storage-lock/go-storage"
 )
 
-// MariaStorageOptions 创建基于Maria为Storage的选项
-type MariaStorageOptions struct {
-	*mysql_storage.MySQLStorageOptions
+// MariadbStorageOptions 创建基于Maria为Storage的选项
+type MariadbStorageOptions struct {
+	*mysql_storage.MysqlStorageOptions
 }
 
-func NewMariaStorageOptions() *MariaStorageOptions {
-	return &MariaStorageOptions{
-		MySQLStorageOptions: mysql_storage.NewMySQLStorageOptions(),
+func NewMariaStorageOptions() *MariadbStorageOptions {
+	return &MariadbStorageOptions{
+		MysqlStorageOptions: mysql_storage.NewMySQLStorageOptions(),
 	}
 }
 
-func (x *MariaStorageOptions) SetConnectionManager(connManager storage.ConnectionManager[*sql.DB]) *MariaStorageOptions {
+func (x *MariadbStorageOptions) SetConnectionManager(connManager storage.ConnectionManager[*sql.DB]) *MariadbStorageOptions {
 	x.ConnectionManager = connManager
 	return x
 }
 
-func (x *MariaStorageOptions) SetTableName(tableName string) *MariaStorageOptions {
+func (x *MariadbStorageOptions) SetTableName(tableName string) *MariadbStorageOptions {
 	x.TableName = tableName
 	return x
+}
+func (x *MariadbStorageOptions) Check() error {
+	return x.MysqlStorageOptions.Check()
 }

@@ -18,7 +18,7 @@ func main() {
 
 	// 然后从这个连接管理器创建MariadbStorage
 	options := mariadb_storage.NewMariaStorageOptions().SetConnectionManager(connectionManager)
-	storage, err := mariadb_storage.NewMariaDbStorage(context.Background(), options)
+	storage, err := mariadb_storage.NewMariadbStorage(context.Background(), options)
 	if err != nil {
 		panic(err)
 	}

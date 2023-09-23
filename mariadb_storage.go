@@ -10,28 +10,28 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-// MariaDbStorage 基于MariaDb作为Storage
-type MariaDbStorage struct {
+// MariadbStorage 基于MariaDb作为Storage
+type MariadbStorage struct {
 
 	// 其实内部就是跟MySQL的实现是一样一样的
-	*mysql_storage.MySQLStorage
+	*mysql_storage.MysqlStorage
 
-	options *MariaStorageOptions
+	options *MariadbStorageOptions
 }
 
-var _ storage.Storage = &MariaDbStorage{}
+var _ storage.Storage = &MariadbStorage{}
 
-// NewMariaDbStorage 创建基于MariaDb的Storage
-func NewMariaDbStorage(ctx context.Context, options *MariaStorageOptions) (*MariaDbStorage, error) {
+// NewMariadbStorage 创建基于MariaDb的Storage
+func NewMariadbStorage(ctx context.Context, options *MariadbStorageOptions) (*MariadbStorage, error) {
 
-	mysqlStorage, err := mysql_storage.NewMySQLStorage(ctx, options.MySQLStorageOptions)
+	mysqlStorage, err := mysql_storage.NewMysqlStorage(ctx, options.MysqlStorageOptions)
 	if err != nil {
 		return nil, err
 	}
 
-	s := &MariaDbStorage{
+	s := &MariadbStorage{
 		options:      options,
-		MySQLStorage: mysqlStorage,
+		MysqlStorage: mysqlStorage,
 	}
 
 	err = s.Init(ctx)
@@ -44,38 +44,38 @@ func NewMariaDbStorage(ctx context.Context, options *MariaStorageOptions) (*Mari
 
 const StorageName = "mariadb-storage"
 
-func (x *MariaDbStorage) GetName() string {
+func (x *MariadbStorage) GetName() string {
 	return StorageName
 }
 
-func (x *MariaDbStorage) Init(ctx context.Context) error {
-	return x.MySQLStorage.Init(ctx)
+func (x *MariadbStorage) Init(ctx context.Context) error {
+	return x.MysqlStorage.Init(ctx)
 }
 
-func (x *MariaDbStorage) UpdateWithVersion(ctx context.Context, lockId string, exceptedVersion, newVersion storage.Version, lockInformation *storage.LockInformation) error {
-	return x.MySQLStorage.UpdateWithVersion(ctx, lockId, exceptedVersion, newVersion, lockInformation)
+func (x *MariadbStorage) UpdateWithVersion(ctx context.Context, lockId string, exceptedVersion, newVersion storage.Version, lockInformation *storage.LockInformation) error {
+	return x.MysqlStorage.UpdateWithVersion(ctx, lockId, exceptedVersion, newVersion, lockInformation)
 }
 
-func (x *MariaDbStorage) CreateWithVersion(ctx context.Context, lockId string, version storage.Version, lockInformation *storage.LockInformation) error {
-	return x.MySQLStorage.CreateWithVersion(ctx, lockId, version, lockInformation)
+func (x *MariadbStorage) CreateWithVersion(ctx context.Context, lockId string, version storage.Version, lockInformation *storage.LockInformation) error {
+	return x.MysqlStorage.CreateWithVersion(ctx, lockId, version, lockInformation)
 }
 
-func (x *MariaDbStorage) DeleteWithVersion(ctx context.Context, lockId string, exceptedVersion storage.Version, lockInformation *storage.LockInformation) error {
-	return x.MySQLStorage.DeleteWithVersion(ctx, lockId, exceptedVersion, lockInformation)
+func (x *MariadbStorage) DeleteWithVersion(ctx context.Context, lockId string, exceptedVersion storage.Version, lockInformation *storage.LockInformation) error {
+	return x.MysqlStorage.DeleteWithVersion(ctx, lockId, exceptedVersion, lockInformation)
 }
 
-func (x *MariaDbStorage) Get(ctx context.Context, lockId string) (string, error) {
-	return x.MySQLStorage.Get(ctx, lockId)
+func (x *MariadbStorage) Get(ctx context.Context, lockId string) (string, error) {
+	return x.MysqlStorage.Get(ctx, lockId)
 }
 
-func (x *MariaDbStorage) GetTime(ctx context.Context) (time.Time, error) {
-	return x.MySQLStorage.GetTime(ctx)
+func (x *MariadbStorage) GetTime(ctx context.Context) (time.Time, error) {
+	return x.MysqlStorage.GetTime(ctx)
 }
 
-func (x *MariaDbStorage) Close(ctx context.Context) error {
-	return x.MySQLStorage.Close(ctx)
+func (x *MariadbStorage) Close(ctx context.Context) error {
+	return x.MysqlStorage.Close(ctx)
 }
 
-func (x *MariaDbStorage) List(ctx context.Context) (iterator.Iterator[*storage.LockInformation], error) {
-	return x.MySQLStorage.List(ctx)
+func (x *MariadbStorage) List(ctx context.Context) (iterator.Iterator[*storage.LockInformation], error) {
+	return x.MysqlStorage.List(ctx)
 }
