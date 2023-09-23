@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/golang-infrastructure/go-iterator v0.0.0-20230524171120-56988a9b127c
-	github.com/storage-lock/go-mysql-storage v0.0.3-0.20230912011331-93f8153bb8b7
+	github.com/storage-lock/go-mysql-storage v0.0.3-0.20230923200627-de392591593c
 	github.com/storage-lock/go-storage v0.0.2
 	github.com/storage-lock/go-storage-test-helper v0.0.3
 	github.com/stretchr/testify v1.8.4

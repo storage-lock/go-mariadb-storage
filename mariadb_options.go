@@ -13,7 +13,7 @@ type MariadbStorageOptions struct {
 
 func NewMariadbStorageOptions() *MariadbStorageOptions {
 	return &MariadbStorageOptions{
-		MysqlStorageOptions: mysql_storage.NewMySQLStorageOptions(),
+		MysqlStorageOptions: mysql_storage.NewMysqlStorageOptions(),
 	}
 }
 
