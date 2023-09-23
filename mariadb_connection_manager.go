@@ -15,17 +15,24 @@ type MariadbConnectionManager struct {
 
 var _ storage.ConnectionManager[*sql.DB] = &MariadbConnectionManager{}
 
-// NewMariaDBConnectionManagerFromDsn 从DSN创建MariaDB连接管理器
-func NewMariaDBConnectionManagerFromDsn(dsn string) *MariadbConnectionManager {
+// NewMariadbConnectionManager 从连接属性创建数据库连接
+func NewMariadbConnectionManager(host string, port uint, user, passwd, database string) *MariadbConnectionManager {
+	return &MariadbConnectionManager{
+		MysqlConnectionManager: mysql_storage.NewMysqlConnectionManager(host, port, user, passwd, database),
+	}
+}
+
+// NewMariadbConnectionManagerFromDsn 从DSN创建MariaDB连接管理器
+func NewMariadbConnectionManagerFromDsn(dsn string) *MariadbConnectionManager {
 	return &MariadbConnectionManager{
 		MysqlConnectionManager: mysql_storage.NewMysqlConnectionManagerFromDsn(dsn),
 	}
 }
 
-// NewMariaDBConnectionManager 从连接属性创建数据库连接
-func NewMariaDBConnectionManager(host string, port uint, user, passwd, database string) *MariadbConnectionManager {
+// NewMariadbConnectionManagerFromSqlDb 从*sql.DB创建MariaDB连接管理器
+func NewMariadbConnectionManagerFromSqlDb(db *sql.DB) *MariadbConnectionManager {
 	return &MariadbConnectionManager{
-		MysqlConnectionManager: mysql_storage.NewMysqlConnectionManager(host, port, user, passwd, database),
+		MysqlConnectionManager: mysql_storage.NewMysqlConnectionManagerFromSqlDb(db),
 	}
 }
 
@@ -54,10 +61,10 @@ func (x *MariadbConnectionManager) SetDatabaseName(databaseName string) *Mariadb
 	return x
 }
 
-const MariaDBConnectionManagerName = "mariadb-connection-manager"
+const MariadbConnectionManagerName = "mariadb-connection-manager"
 
 func (x *MariadbConnectionManager) Name() string {
-	return MariaDBConnectionManagerName
+	return MariadbConnectionManagerName
 }
 
 // Take 获取到数据库的连接

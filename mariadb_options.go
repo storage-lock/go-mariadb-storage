@@ -11,7 +11,7 @@ type MariadbStorageOptions struct {
 	*mysql_storage.MysqlStorageOptions
 }
 
-func NewMariaStorageOptions() *MariadbStorageOptions {
+func NewMariadbStorageOptions() *MariadbStorageOptions {
 	return &MariadbStorageOptions{
 		MysqlStorageOptions: mysql_storage.NewMySQLStorageOptions(),
 	}

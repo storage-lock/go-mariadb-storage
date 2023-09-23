@@ -19,7 +19,7 @@ func main() {
 
 	// 则可以从这个*sql.DB中创建一个MariadbStorage
 	connectionManager := storage.NewFixedSqlDBConnectionManager(db)
-	options := mariadb_storage.NewMariaStorageOptions().SetConnectionManager(connectionManager)
+	options := mariadb_storage.NewMariadbStorageOptions().SetConnectionManager(connectionManager)
 	storage, err := mariadb_storage.NewMariadbStorage(context.Background(), options)
 	if err != nil {
 		panic(err)

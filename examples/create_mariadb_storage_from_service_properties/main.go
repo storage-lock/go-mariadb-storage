@@ -14,10 +14,10 @@ func main() {
 	username := "root"
 	passwd := "UeGqAm8CxYGldMDLoNNt"
 	database := "storage_lock_test"
-	connectionManager := mariadb_storage.NewMariaDBConnectionManager(host, port, username, passwd, database)
+	connectionManager := mariadb_storage.NewMariadbConnectionManager(host, port, username, passwd, database)
 
 	// 然后从这个连接管理器创建MariadbStorage
-	options := mariadb_storage.NewMariaStorageOptions().SetConnectionManager(connectionManager)
+	options := mariadb_storage.NewMariadbStorageOptions().SetConnectionManager(connectionManager)
 	storage, err := mariadb_storage.NewMariadbStorage(context.Background(), options)
 	if err != nil {
 		panic(err)
