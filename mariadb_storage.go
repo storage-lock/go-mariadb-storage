@@ -48,6 +48,12 @@ func (x *MariadbStorage) GetName() string {
 	return StorageName
 }
 
+// Capabilities 声明 MariaDB 存储支持的能力
+// MariaDB 兼容 MySQL 协议，同样支持 CAS 和可靠时间源
+func (x *MariadbStorage) Capabilities() []storage.StorageCapability {
+	return x.MysqlStorage.Capabilities()
+}
+
 func (x *MariadbStorage) Init(ctx context.Context) error {
 	return x.MysqlStorage.Init(ctx)
 }
