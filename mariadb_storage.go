@@ -46,5 +46,12 @@ func (x *MariadbStorage) GetName() string {
 	return StorageName
 }
 
-// Capabilities 声明 MariaDB 存储支持的能力
-// MariaDB 兼容 MySQL 协议，同样支持 CAS 和可靠时间源
+// Capabilities 声明 MariaDB 存储支持的能力。
+// MariaDB 兼容 MySQL 协议，同样支持 CAS 和可靠时间源。
+// 未初始化的零值不委托给内部的 MysqlStorage，否则空指针。
+func (x *MariadbStorage) Capabilities() []storage.StorageCapability {
+	if x.MysqlStorage == nil {
+		return []storage.StorageCapability{storage.CapabilityCAS, storage.CapabilityReliableTime, storage.CapabilityWatch}
+	}
+	return x.MysqlStorage.Capabilities()
+}
