@@ -1,7 +1,6 @@
 package mariadb_storage
 
 import (
-	"context"
 	"database/sql"
 	mysql_storage "github.com/storage-lock/go-mysql-storage"
 	"github.com/storage-lock/go-storage"
@@ -41,45 +40,3 @@ func (x *MariadbConnectionManager) SetHost(host string) *MariadbConnectionManage
 	return x
 }
 
-func (x *MariadbConnectionManager) SetPort(port uint) *MariadbConnectionManager {
-	x.Port = port
-	return x
-}
-
-func (x *MariadbConnectionManager) SetUser(user string) *MariadbConnectionManager {
-	x.User = user
-	return x
-}
-
-func (x *MariadbConnectionManager) SetPasswd(passwd string) *MariadbConnectionManager {
-	x.Passwd = passwd
-	return x
-}
-
-func (x *MariadbConnectionManager) SetDatabaseName(databaseName string) *MariadbConnectionManager {
-	x.DatabaseName = databaseName
-	return x
-}
-
-const MariadbConnectionManagerName = "mariadb-connection-manager"
-
-func (x *MariadbConnectionManager) Name() string {
-	return MariadbConnectionManagerName
-}
-
-// Take 获取到数据库的连接
-func (x *MariadbConnectionManager) Take(ctx context.Context) (*sql.DB, error) {
-	return x.MysqlConnectionManager.Take(ctx)
-}
-
-func (x *MariadbConnectionManager) GetDSN() string {
-	return x.MysqlConnectionManager.GetDSN()
-}
-
-func (x *MariadbConnectionManager) Return(ctx context.Context, db *sql.DB) error {
-	return x.MysqlConnectionManager.Return(ctx, db)
-}
-
-func (x *MariadbConnectionManager) Shutdown(ctx context.Context) error {
-	return x.MysqlConnectionManager.Shutdown(ctx)
-}

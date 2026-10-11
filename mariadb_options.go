@@ -22,10 +22,3 @@ func (x *MariadbStorageOptions) SetConnectionManager(connManager storage.Connect
 	return x
 }
 
-func (x *MariadbStorageOptions) SetTableName(tableName string) *MariadbStorageOptions {
-	x.TableName = tableName
-	return x
-}
-func (x *MariadbStorageOptions) Check() error {
-	return x.MysqlStorageOptions.Check()
-}

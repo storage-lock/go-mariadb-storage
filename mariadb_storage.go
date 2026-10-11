@@ -2,10 +2,8 @@ package mariadb_storage
 
 import (
 	"context"
-	"github.com/golang-infrastructure/go-iterator"
 	mysql_storage "github.com/storage-lock/go-mysql-storage"
 	"github.com/storage-lock/go-storage"
-	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -50,38 +48,3 @@ func (x *MariadbStorage) GetName() string {
 
 // Capabilities 声明 MariaDB 存储支持的能力
 // MariaDB 兼容 MySQL 协议，同样支持 CAS 和可靠时间源
-func (x *MariadbStorage) Capabilities() []storage.StorageCapability {
-	return x.MysqlStorage.Capabilities()
-}
-
-func (x *MariadbStorage) Init(ctx context.Context) error {
-	return x.MysqlStorage.Init(ctx)
-}
-
-func (x *MariadbStorage) UpdateWithVersion(ctx context.Context, lockId string, exceptedVersion, newVersion storage.Version, lockInformation *storage.LockInformation) error {
-	return x.MysqlStorage.UpdateWithVersion(ctx, lockId, exceptedVersion, newVersion, lockInformation)
-}
-
-func (x *MariadbStorage) CreateWithVersion(ctx context.Context, lockId string, version storage.Version, lockInformation *storage.LockInformation) error {
-	return x.MysqlStorage.CreateWithVersion(ctx, lockId, version, lockInformation)
-}
-
-func (x *MariadbStorage) DeleteWithVersion(ctx context.Context, lockId string, exceptedVersion storage.Version, lockInformation *storage.LockInformation) error {
-	return x.MysqlStorage.DeleteWithVersion(ctx, lockId, exceptedVersion, lockInformation)
-}
-
-func (x *MariadbStorage) Get(ctx context.Context, lockId string) (string, error) {
-	return x.MysqlStorage.Get(ctx, lockId)
-}
-
-func (x *MariadbStorage) GetTime(ctx context.Context) (time.Time, error) {
-	return x.MysqlStorage.GetTime(ctx)
-}
-
-func (x *MariadbStorage) Close(ctx context.Context) error {
-	return x.MysqlStorage.Close(ctx)
-}
-
-func (x *MariadbStorage) List(ctx context.Context) (iterator.Iterator[*storage.LockInformation], error) {
-	return x.MysqlStorage.List(ctx)
-}
