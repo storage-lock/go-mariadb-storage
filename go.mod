@@ -5,7 +5,7 @@ go 1.23
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.2
 	github.com/go-sql-driver/mysql v1.7.1
-	github.com/storage-lock/go-mysql-storage v0.0.3-0.20230923200627-de392591593c
+	github.com/storage-lock/go-mysql-storage v0.0.3
 	github.com/storage-lock/go-storage v0.0.3
 	github.com/storage-lock/go-storage-lock v0.0.6
 	github.com/stretchr/testify v1.11.1
